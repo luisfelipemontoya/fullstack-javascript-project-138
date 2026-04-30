@@ -27,6 +27,6 @@ jobs:
         run: npm test -- --coverage
 
       - name: Upload coverage to Qlty
-        uses: paambaati/codeclimate-action@v4.0.0
+        uses: paambaati/codeclimate-action@v5.0.0
         env:
           QLTY_TOKEN: ${{ secrets.QLTY_TOKEN }}
