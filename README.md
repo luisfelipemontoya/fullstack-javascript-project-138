@@ -6,3 +6,6 @@
 [![Code Coverage](https://qlty.sh/gh/luisfelipemontoya/projects/fullstack-javascript-project-138/coverage.svg)](https://qlty.sh/gh/luisfelipemontoya/projects/fullstack-javascript-project-138)
 
 [![Node CI](https://github.com/luisfelipemontoya/fullstack-javascript-project-138/actions/workflows/nodejs.yml/badge.svg)](https://github.com/luisfelipemontoya/fullstack-javascript-project-138/actions)
+
+## page-loader-demo
+[![asciicast](https://asciinema.org/a/AbkKWN2czJJG5mmK.svg)](https://asciinema.org/a/AbkKWN2czJJG5mmK)

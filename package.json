@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "[![Actions Status](https://github.com/luisfelipemontoya/fullstack-javascript-project-138/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/luisfelipemontoya/fullstack-javascript-project-138/actions)",
   "main": "index.js",
+  "bin": {
+    "page-loader": "./bin/page-loader.js"
+  },
   "scripts": {
-    "test": "jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --coverage",
     "link": "eslint . --fix"
   },
   "author": "",
