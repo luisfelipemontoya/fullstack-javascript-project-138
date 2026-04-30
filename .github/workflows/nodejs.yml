@@ -27,6 +27,7 @@ jobs:
         run: npm test -- --coverage
 
       - name: Upload coverage to Qlty
-        uses: paambaati/codeclimate-action@v5.0.0
+        uses: qltysh/qlty-action/coverage@v3
         env:
           QLTY_TOKEN: ${{ secrets.QLTY_TOKEN }}
+          files: coverage/lcov.info
