@@ -9,3 +9,6 @@
 
 ## page-loader-demo
 [![asciicast](https://asciinema.org/a/AbkKWN2czJJG5mmK.svg)](https://asciinema.org/a/AbkKWN2czJJG5mmK)
+
+## feat(page-loader): download images
+[![asciicast](https://asciinema.org/a/AbkKWN2czJJG5mmK.svg)](https://asciinema.org/a/AbkKWN2czJJG5mmK)
