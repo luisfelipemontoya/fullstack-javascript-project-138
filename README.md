@@ -12,3 +12,6 @@
 
 ## feat(page-loader): download images
 [![asciicast](https://asciinema.org/a/AbkKWN2czJJG5mmK.svg)](https://asciinema.org/a/AbkKWN2czJJG5mmK)
+
+## Step 3: Downloading Local Resources (link, script)
+[![asciicast](https://asciinema.org/a/7LFUeq4YWDJxU05Q.svg)](https://asciinema.org/a/7LFUeq4YWDJxU05Q)

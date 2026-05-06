@@ -1,0 +1,1 @@
+import{o as e}from"./chunk-DNjYT6Lt.js";import{t}from"./react-BckXAinD.js";var n=e(t(),1),r=typeof document<`u`?n.useLayoutEffect:n.useEffect;export{r as t};

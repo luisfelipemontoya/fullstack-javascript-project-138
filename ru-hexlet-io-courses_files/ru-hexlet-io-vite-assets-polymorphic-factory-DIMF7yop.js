@@ -1,0 +1,1 @@
+import{r as e}from"./factory-DAKTGPxc.js";import{t}from"./jsx-runtime-4qf-17Wd.js";var n=t();function r(t){let r=t;return r.withProps=e=>{let t=t=>(0,n.jsx)(r,{...e,...t});return t.extend=r.extend,t.displayName=`WithProps(${r.displayName})`,t},r.extend=e,r}export{r as t};
