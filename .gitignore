@@ -1,0 +1,4 @@
+*_files/
+*.html
+coverage/
+node_modules/

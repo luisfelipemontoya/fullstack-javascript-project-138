@@ -1,1 +1,0 @@
-function e(e=`mantine-`){return`${e}${Math.random().toString(36).slice(2,11)}`}export{e as t};

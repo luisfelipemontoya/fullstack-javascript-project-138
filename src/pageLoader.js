@@ -1,7 +1,10 @@
+import debug from 'debug';
 import * as cheerio from 'cheerio';
 import axios from 'axios';
 import fs from 'fs/promises';
 import path from 'path';
+
+const log = debug('page-loader');
 
 const makeFileName = (url) => {
     const { hostname, pathname } = new URL(url);
@@ -39,9 +42,13 @@ const makeAssetName = (url) => {
 };
 
 const pageLoader = (url, outputDir = process.cwd()) => {
+    log(`started downloading: ${url}`);
+
     return axios.get(url)
         .then((response) => {
             const html = response.data;
+
+            log('html loaded');
 
             const fileName = makeFileName(url);
             const filePath = path.join(outputDir, fileName);
@@ -67,6 +74,7 @@ const pageLoader = (url, outputDir = process.cwd()) => {
 
             imgElements.each((i, el) => {
                 const src = $(el).attr('src');
+
                 if (!src) return;
 
                 const fullUrl = new URL(src, url).href;
@@ -85,6 +93,7 @@ const pageLoader = (url, outputDir = process.cwd()) => {
 
             linkElements.each((i, el) => {
                 const href = $(el).attr('href');
+
                 if (!href) return;
 
                 const fullUrl = new URL(href, url).href;
@@ -103,6 +112,7 @@ const pageLoader = (url, outputDir = process.cwd()) => {
 
             scriptElements.each((i, el) => {
                 const src = $(el).attr('src');
+
                 if (!src) return;
 
                 const fullUrl = new URL(src, url).href;
@@ -119,23 +129,34 @@ const pageLoader = (url, outputDir = process.cwd()) => {
                 });
             });
 
+            log(`resources found: ${resources.length}`);
+
             return fs.mkdir(dirPath, { recursive: true })
                 .then(() => Promise.all(
-                    resources.map((res) =>
-                        axios.get(res.url, { responseType: 'arraybuffer' })
+                    resources.map((res) => {
+                        log(`downloading resource: ${res.url}`);
+
+                        return axios.get(res.url, {
+                            responseType: 'arraybuffer',
+                        })
                             .then((r) => {
                                 const fileFullPath = path.join(dirPath, res.name);
+
                                 return fs.writeFile(fileFullPath, r.data);
-                            }),
-                    ),
+                            });
+                    }),
                 ))
                 .then(() => {
                     resources.forEach((res) => {
                         const localPath = path.join(dirName, res.name);
+
                         $(res.element).attr(res.attr, localPath);
                     });
 
+                    log(`saving html: ${filePath}`);
+
                     const updatedHtml = $.html();
+
                     return fs.writeFile(filePath, updatedHtml);
                 })
                 .then(() => filePath);

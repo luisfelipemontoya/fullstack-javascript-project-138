@@ -15,3 +15,7 @@
 
 ## Step 3: Downloading Local Resources (link, script)
 [![asciicast](https://asciinema.org/a/7LFUeq4YWDJxU05Q.svg)](https://asciinema.org/a/7LFUeq4YWDJxU05Q)
+
+## Step 4: Debug Logs
+[![asciicast](https://asciinema.org/a/1svlR7997zsSAX3y.svg)](https://asciinema.org/a/1svlR7997zsSAX3y)
+
