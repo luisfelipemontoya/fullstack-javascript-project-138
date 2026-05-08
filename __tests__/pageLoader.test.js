@@ -157,7 +157,7 @@ describe('pageLoader', () => {
 
     await expect(pageLoader(url, tempDir))
       .rejects
-      .toThrow(/404/);
+      .toThrow('Failed to load page');
   });
 
   test('throws when output directory does not exist', async () => {
@@ -171,6 +171,6 @@ describe('pageLoader', () => {
 
     await expect(pageLoader(url, invalidDir))
       .rejects
-      .toThrow(/ENOENT|EACCES/);
+      .toThrow('Cannot create directory');
   });
 });

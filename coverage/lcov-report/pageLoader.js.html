@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96% </span>
+                <span class="strong">93.67% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>72/75</span>
+                <span class='fraction'>74/79</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">89.47% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>15/15</span>
+                <span class='fraction'>17/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">97.26% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>69/69</span>
+                <span class='fraction'>71/73</span>
             </div>
         
             
@@ -228,7 +228,19 @@
 <a name='L163'></a><a href='#L163'>163</a>
 <a name='L164'></a><a href='#L164'>164</a>
 <a name='L165'></a><a href='#L165'>165</a>
-<a name='L166'></a><a href='#L166'>166</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a>
+<a name='L177'></a><a href='#L177'>177</a>
+<a name='L178'></a><a href='#L178'>178</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -276,6 +288,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
@@ -362,6 +377,9 @@
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
@@ -370,6 +388,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
@@ -389,7 +410,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -440,6 +464,9 @@ const pageLoader = (url, outputDir = <span class="branch-0 cbranch-no" title="br
     log(`started downloading: ${url}`);
 &nbsp;
     return axios.get(url)
+        .catch(() =&gt; {
+            throw new Error(`Failed to load page: ${url}`);
+        })
         .then((response) =&gt; {
             const html = response.data;
 &nbsp;
@@ -527,6 +554,9 @@ const pageLoader = (url, outputDir = <span class="branch-0 cbranch-no" title="br
             log(`resources found: ${resources.length}`);
 &nbsp;
             return fs.mkdir(dirPath, { recursive: true })
+                .catch(() =&gt; {
+                    throw new Error(`Cannot create directory: ${dirPath}`);
+                })
                 .then(() =&gt; Promise.all(
                     resources.map((res) =&gt; {
                         log(`downloading resource: ${res.url}`);
@@ -534,6 +564,9 @@ const pageLoader = (url, outputDir = <span class="branch-0 cbranch-no" title="br
                         return axios.get(res.url, {
                             responseType: 'arraybuffer',
                         })
+                            .catch(<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >                                throw new Error(`Failed to load resource: ${res.url}`);</span>
+                            })
                             .then((r) =&gt; {
                                 const fileFullPath = path.join(dirPath, res.name);
 &nbsp;
@@ -552,9 +585,12 @@ const pageLoader = (url, outputDir = <span class="branch-0 cbranch-no" title="br
 &nbsp;
                     const updatedHtml = $.html();
 &nbsp;
-                    return fs.writeFile(filePath, updatedHtml);
-                })
-                .then(() =&gt; filePath);
+                    return fs.writeFile(filePath, updatedHtml)
+                        .catch(<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >                            throw new Error(`Cannot write file: ${filePath}`);</span>
+                        })
+                        .then(() =&gt; filePath);
+                });
         });
 };
 &nbsp;
@@ -565,7 +601,7 @@ export default pageLoader;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-05-07T21:27:51.242Z
+                at 2026-05-08T04:30:34.439Z
             </div>
         <script src="prettify.js"></script>
         <script>
