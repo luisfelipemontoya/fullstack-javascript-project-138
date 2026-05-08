@@ -45,6 +45,9 @@ const pageLoader = (url, outputDir = process.cwd()) => {
     log(`started downloading: ${url}`);
 
     return axios.get(url)
+        .catch(() => {
+            throw new Error(`Failed to load page: ${url}`);
+        })
         .then((response) => {
             const html = response.data;
 
@@ -132,6 +135,9 @@ const pageLoader = (url, outputDir = process.cwd()) => {
             log(`resources found: ${resources.length}`);
 
             return fs.mkdir(dirPath, { recursive: true })
+                .catch(() => {
+                    throw new Error(`Cannot create directory: ${dirPath}`);
+                })
                 .then(() => Promise.all(
                     resources.map((res) => {
                         log(`downloading resource: ${res.url}`);
@@ -139,6 +145,9 @@ const pageLoader = (url, outputDir = process.cwd()) => {
                         return axios.get(res.url, {
                             responseType: 'arraybuffer',
                         })
+                            .catch(() => {
+                                throw new Error(`Failed to load resource: ${res.url}`);
+                            })
                             .then((r) => {
                                 const fileFullPath = path.join(dirPath, res.name);
 
@@ -157,9 +166,12 @@ const pageLoader = (url, outputDir = process.cwd()) => {
 
                     const updatedHtml = $.html();
 
-                    return fs.writeFile(filePath, updatedHtml);
-                })
-                .then(() => filePath);
+                    return fs.writeFile(filePath, updatedHtml)
+                        .catch(() => {
+                            throw new Error(`Cannot write file: ${filePath}`);
+                        })
+                        .then(() => filePath);
+                });
         });
 };
 

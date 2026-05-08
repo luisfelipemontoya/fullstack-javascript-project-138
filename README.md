@@ -19,3 +19,6 @@
 ## Step 4: Debug Logs
 [![asciicast](https://asciinema.org/a/1svlR7997zsSAX3y.svg)](https://asciinema.org/a/1svlR7997zsSAX3y)
 
+## Step 5: Error handling example
+[![asciicast]( https://asciinema.org/a/HtZvS75AWSh4MYTb.svg)]
+(https://asciinema.org/a/HtZvS75AWSh4MYTb)

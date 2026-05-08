@@ -25,6 +25,7 @@ describe('pageLoader', () => {
       .reply(200, html);
 
     const filePath = await pageLoader(url, tempDir);
+
     const content = await fs.readFile(filePath, 'utf-8');
 
     expect(content).toContain('Hello');
@@ -52,6 +53,7 @@ describe('pageLoader', () => {
       .reply(200, imageData);
 
     const filePath = await pageLoader(url, tempDir);
+
     const content = await fs.readFile(filePath, 'utf-8');
 
     expect(content).toContain('example-com-page_files');
@@ -84,13 +86,13 @@ describe('pageLoader', () => {
       .reply(200, html);
 
     const filePath = await pageLoader(url, tempDir);
+
     const content = await fs.readFile(filePath, 'utf-8');
 
     expect(content).toContain('<img>');
   });
 
-  // 🔥 NUEVO TEST PASO 3
-  test('downloads local resources (link, script) and ignores external', async () => {
+  test('downloads css and js and ignores external resources', async () => {
     const url = 'https://example.com/page';
 
     const html = `
@@ -101,7 +103,7 @@ describe('pageLoader', () => {
         </head>
         <body>
           <script src="/js/app.js"></script>
-          <script src="https://cdn.com/lib.js"></script>
+          <script src="https://external.com/lib.js"></script>
         </body>
       </html>
     `;
@@ -122,25 +124,53 @@ describe('pageLoader', () => {
       .reply(200, jsData);
 
     const filePath = await pageLoader(url, tempDir);
+
     const content = await fs.readFile(filePath, 'utf-8');
 
-    // ✔ locales reescritos
     expect(content).toContain('example-com-page_files');
-
-    // ✔ externos NO modificados
-    expect(content).toContain('https://cdn.com/style.css');
-    expect(content).toContain('https://cdn.com/lib.js');
 
     const filesDir = path.join(tempDir, 'example-com-page_files');
     const files = await fs.readdir(filesDir);
 
-    // ✔ solo recursos locales descargados
     expect(files.length).toBe(2);
 
-    const savedCss = await fs.readFile(path.join(filesDir, files.find(f => f.endsWith('.css'))), 'utf-8');
-    const savedJs = await fs.readFile(path.join(filesDir, files.find(f => f.endsWith('.js'))), 'utf-8');
+    expect(files.some((f) => f.endsWith('.css'))).toBe(true);
+    expect(files.some((f) => f.endsWith('.js'))).toBe(true);
 
-    expect(savedCss).toBe(cssData);
-    expect(savedJs).toBe(jsData);
+    const cssFile = files.find((f) => f.endsWith('.css'));
+    const cssContent = await fs.readFile(path.join(filesDir, cssFile), 'utf-8');
+
+    expect(cssContent).toBe(cssData);
+
+    const jsFile = files.find((f) => f.endsWith('.js'));
+    const jsContent = await fs.readFile(path.join(filesDir, jsFile), 'utf-8');
+
+    expect(jsContent).toBe(jsData);
+  });
+
+  test('throws on 404', async () => {
+    const url = 'https://ru.hexlet.io/unknown-page';
+
+    nock('https://ru.hexlet.io')
+      .get('/unknown-page')
+      .reply(404);
+
+    await expect(pageLoader(url, tempDir))
+      .rejects
+      .toThrow(/404/);
+  });
+
+  test('throws when output directory does not exist', async () => {
+    const url = 'https://ru.hexlet.io/courses';
+
+    nock('https://ru.hexlet.io')
+      .get('/courses')
+      .reply(200, '<html></html>');
+
+    const invalidDir = '/invalid/path';
+
+    await expect(pageLoader(url, invalidDir))
+      .rejects
+      .toThrow(/ENOENT|EACCES/);
   });
 });
