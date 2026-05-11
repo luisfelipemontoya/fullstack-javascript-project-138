@@ -22,3 +22,6 @@
 ## Step 5: Error handling example
 [![asciicast]( https://asciinema.org/a/HtZvS75AWSh4MYTb.svg)]
 (https://asciinema.org/a/HtZvS75AWSh4MYTb)
+
+## Step 6: Download Progress
+[![asciicast](https://asciinema.org/a/21TCwpNnlXSnc5l9.svg)](https://asciinema.org/a/21TCwpNnlXSnc5l9)
