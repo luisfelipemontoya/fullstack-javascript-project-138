@@ -20,9 +20,7 @@ describe('pageLoader', () => {
     const url = 'https://example.com/test';
     const html = '<html><body>Hello</body></html>';
 
-    nock('https://example.com')
-      .get('/test')
-      .reply(200, html);
+    nock('https://example.com').get('/test').reply(200, html);
 
     const filePath = await pageLoader(url, tempDir);
 
@@ -44,13 +42,9 @@ describe('pageLoader', () => {
 
     const imageData = Buffer.from('fake-image-content');
 
-    nock('https://example.com')
-      .get('/page')
-      .reply(200, html);
+    nock('https://example.com').get('/page').reply(200, html);
 
-    nock('https://example.com')
-      .get('/assets/test.png')
-      .reply(200, imageData);
+    nock('https://example.com').get('/assets/test.png').reply(200, imageData);
 
     const filePath = await pageLoader(url, tempDir);
 
@@ -81,9 +75,7 @@ describe('pageLoader', () => {
       </html>
     `;
 
-    nock('https://example.com')
-      .get('/page')
-      .reply(200, html);
+    nock('https://example.com').get('/page').reply(200, html);
 
     const filePath = await pageLoader(url, tempDir);
 
@@ -111,17 +103,11 @@ describe('pageLoader', () => {
     const cssData = 'body { color: red; }';
     const jsData = 'console.log("hello");';
 
-    nock('https://example.com')
-      .get('/page')
-      .reply(200, html);
+    nock('https://example.com').get('/page').reply(200, html);
 
-    nock('https://example.com')
-      .get('/assets/app.css')
-      .reply(200, cssData);
+    nock('https://example.com').get('/assets/app.css').reply(200, cssData);
 
-    nock('https://example.com')
-      .get('/js/app.js')
-      .reply(200, jsData);
+    nock('https://example.com').get('/js/app.js').reply(200, jsData);
 
     const filePath = await pageLoader(url, tempDir);
 
@@ -151,26 +137,22 @@ describe('pageLoader', () => {
   test('throws on 404', async () => {
     const url = 'https://ru.hexlet.io/unknown-page';
 
-    nock('https://ru.hexlet.io')
-      .get('/unknown-page')
-      .reply(404);
+    nock('https://ru.hexlet.io').get('/unknown-page').reply(404);
 
-    await expect(pageLoader(url, tempDir))
-      .rejects
-      .toThrow('Failed to load page');
+    await expect(pageLoader(url, tempDir)).rejects.toThrow(
+      'Failed to load page'
+    );
   });
 
   test('throws when output directory does not exist', async () => {
     const url = 'https://ru.hexlet.io/courses';
 
-    nock('https://ru.hexlet.io')
-      .get('/courses')
-      .reply(200, '<html></html>');
+    nock('https://ru.hexlet.io').get('/courses').reply(200, '<html></html>');
 
     const invalidDir = '/invalid/path';
 
-    await expect(pageLoader(url, invalidDir))
-      .rejects
-      .toThrow('Cannot create directory');
+    await expect(pageLoader(url, invalidDir)).rejects.toThrow(
+      'Cannot create directory'
+    );
   });
 });

@@ -4,9 +4,9 @@
     "es2021": true,
     "jest": true
   },
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended", "prettier"],
   "parserOptions": {
-    "ecmaVersion": "latest",
+    "ecmaVersion": 2021,
     "sourceType": "module"
   },
   "rules": {
