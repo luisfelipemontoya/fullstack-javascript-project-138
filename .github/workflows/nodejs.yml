@@ -28,6 +28,6 @@ jobs:
 
       - name: Upload coverage to Qlty
         uses: qltysh/qlty-action/coverage@v2
-        env:
-          QLTY_TOKEN: ${{ secrets.QLTY_TOKEN }}
+        with:
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
           files: coverage/lcov.info

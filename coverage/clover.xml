@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1778537330290" clover="3.2.0">
-  <project timestamp="1778537330291" name="All files">
+<coverage generated="1778556769465" clover="3.2.0">
+  <project timestamp="1778556769465" name="All files">
     <metrics statements="82" coveredstatements="80" conditionals="15" coveredconditionals="11" methods="23" coveredmethods="21" elements="120" coveredelements="112" complexity="0" loc="82" ncloc="82" packages="1" files="1" classes="1"/>
     <file name="pageLoader.js" path="/home/pipemontoya/proyectos/fullstack-javascript-project-138/src/pageLoader.js">
       <metrics statements="82" coveredstatements="80" conditionals="15" coveredconditionals="11" methods="23" coveredmethods="21"/>
