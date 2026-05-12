@@ -140,7 +140,7 @@ describe('pageLoader', () => {
     nock('https://ru.hexlet.io').get('/unknown-page').reply(404);
 
     await expect(pageLoader(url, tempDir)).rejects.toThrow(
-      'Failed to load page'
+      'Failed to load page',
     );
   });
 
@@ -152,7 +152,7 @@ describe('pageLoader', () => {
     const invalidDir = '/invalid/path';
 
     await expect(pageLoader(url, invalidDir)).rejects.toThrow(
-      'Cannot create directory'
+      'Cannot create directory',
     );
   });
 });
