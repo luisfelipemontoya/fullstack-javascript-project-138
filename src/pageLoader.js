@@ -82,8 +82,7 @@ const collectResources = ($, url) => {
         const resource = new URL(resourceUrl, baseUrl);
         const base = new URL(baseUrl);
 
-        return resource.hostname === base.hostname
-            || resource.hostname.endsWith(`.${base.hostname}`);
+        return resource.hostname === base.hostname;
     };
 
     imgElements.each((i, el) => {
