@@ -27,9 +27,9 @@ const makeDirName = (url) => {
 const makeAssetName = (url) => {
     const { hostname, pathname } = new URL(url);
 
-    const ext = path.extname(pathname);
+    const ext = path.extname(pathname) || '.html';
 
-    const raw = `${hostname}${pathname.replace(ext, '')}`;
+    const raw = `${hostname}${pathname.replace(path.extname(pathname), '')}`;
 
     const normalized = raw
         .replace(/[^a-zA-Z0-9]/g, '-')
