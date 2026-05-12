@@ -169,7 +169,7 @@ const pageLoader = (url, outputDir = process.cwd()) => {
 
             log(`resources found: ${resources.length}`);
 
-            return fs.mkdir(dirPath, { recursive: true })
+            return fs.mkdir(dirPath)
                 .catch(() => {
                     throw new Error(`Cannot create directory: ${dirPath}`);
                 })
